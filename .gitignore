@@ -1,0 +1,24 @@
+# Entornos
+backend/.env
+backend/.env.backup
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Dependencias
+backend/vendor/
+frontend/node_modules/
+
+# Laravel
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+backend/bootstrap/cache/
+
+# Vite / build
+frontend/dist/
+
+# Sistema
+.DS_Store
+Thumbs.db
