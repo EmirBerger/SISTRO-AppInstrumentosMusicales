@@ -1,0 +1,102 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.artist {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.badge {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-top: 6px;
+}
+
+.badgeEasy   { background: rgba(51, 171, 27, 0.15); color: #33AB1B; border: 1px solid rgba(51, 171, 27, 0.3); }
+.badgeMedium { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.badgeHard   { background: rgba(239, 68, 68, 0.15);  color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+.sheetWrapper {
+  background: #0f1729;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 300px;
+  position: relative;
+}
+
+.sheetContainer {
+  width: 100%;
+}
+
+.sheetContainer svg {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.sheetStatus {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.sheetError {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.status {
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  padding: 40px 0;
+}
+
+.error {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .page { max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .title { font-size: 1.4rem; }
+  .sheetWrapper { padding: 16px; }
+}

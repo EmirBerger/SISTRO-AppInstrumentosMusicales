@@ -1,0 +1,179 @@
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  margin: -24px 0 40px 0;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+}
+
+.filterBtn:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.filterActive {
+  background-color: #33AB1B;
+  border-color: #33AB1B;
+  color: #ffffff;
+}
+
+.filterActive:hover {
+  background-color: #289015;
+  border-color: #289015;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.songCard {
+  background-color: #001d57;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.songCard:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.songImage {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.songPlaceholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.songInfo {
+  flex: 1;
+}
+
+.songTitle {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+}
+
+.songArtist {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.badgeEasy {
+  background-color: rgba(51, 171, 27, 0.2);
+  color: #33AB1B;
+}
+
+.badgeMedium {
+  background-color: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.badgeHard {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+.status {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+@media (max-width: 900px) {
+  .page {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .songCard {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .songImage,
+  .songPlaceholder {
+    width: 44px;
+    height: 44px;
+  }
+
+  .songTitle {
+    font-size: 0.88rem;
+  }
+
+  .songArtist {
+    font-size: 0.78rem;
+  }
+}

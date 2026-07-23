@@ -1,0 +1,30 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #002875;
+}
+
+.main {
+  margin-left: 240px;
+  flex: 1;
+  padding: 40px;
+  color: #ffffff;
+  position: relative;
+}
+
+/* ── Tablet ── */
+@media (max-width: 900px) {
+  .main {
+    margin-left: 72px;
+    padding: 32px 24px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .main {
+    margin-left: 0;
+    padding: 24px 16px;
+    padding-bottom: 88px; /* espacio para la barra inferior */
+  }
+}

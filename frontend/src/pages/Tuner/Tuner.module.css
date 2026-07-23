@@ -1,0 +1,255 @@
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+.card {
+  background-color: #001d57;
+  border-radius: 16px;
+  padding: 40px 36px;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+/* Nota */
+.noteDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.noteName {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.freq {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+/* Medidor */
+.meter {
+  width: 100%;
+}
+
+.meterTrack {
+  position: relative;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  margin-bottom: 12px;
+}
+
+.meterNeedle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: left 0.1s ease, background-color 0.2s;
+}
+
+.meterCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.meterLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+.meterLabels span:nth-child(2) {
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+/* Cuerdas */
+.strings {
+  display: flex;
+  gap: 10px;
+}
+
+.stringBtn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.stringActive {
+  border-color: #33AB1B;
+  color: #33AB1B;
+  background-color: rgba(51, 171, 27, 0.15);
+}
+
+/* Selector de instrumento */
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  margin: -24px 0 32px 0;
+}
+
+.instrumentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.instrumentCard {
+  background-color: #001d57;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.instrumentCard:hover {
+  border-color: #33AB1B;
+  transform: translateY(-2px);
+}
+
+/* Cabecera instrumento en afinador */
+.instrumentHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+}
+
+.instrumentName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  flex: 1;
+}
+
+.changeBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.changeBtn:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* Botón */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+
+.btnStart {
+  background-color: #33AB1B;
+  color: #ffffff;
+}
+
+.btnStart:hover {
+  background-color: #289015;
+}
+
+.btnStop {
+  background-color: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+  border: 2px solid rgba(255, 107, 107, 0.4);
+}
+
+.btnStop:hover {
+  background-color: rgba(255, 107, 107, 0.25);
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .page {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .instrumentGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .noteName {
+    font-size: 4.5rem;
+  }
+
+  .card {
+    padding: 28px 20px;
+  }
+
+  .strings {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

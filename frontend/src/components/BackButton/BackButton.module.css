@@ -1,0 +1,26 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  transition: color 0.15s;
+}
+
+.btn:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .label {
+    display: none;
+  }
+}

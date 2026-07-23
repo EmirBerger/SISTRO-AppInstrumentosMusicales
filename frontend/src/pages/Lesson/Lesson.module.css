@@ -1,0 +1,159 @@
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  margin: 0 0 40px 0;
+}
+
+.content {
+  background-color: #001d57;
+  border-radius: 16px;
+  padding: 28px 32px;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Bloques ─────────────────────────────────────────── */
+
+.blockText {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.blockImage {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.blockImage img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  min-height: 200px;
+  background-color: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+}
+
+.blockImage figcaption {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  padding: 8px 14px;
+  text-align: center;
+}
+
+.blockTip {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background-color: rgba(51, 171, 27, 0.1);
+  border: 1px solid rgba(51, 171, 27, 0.3);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+
+.blockTip p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.tipIcon {
+  color: #33AB1B;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.blockConcepts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.conceptsLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.conceptsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.conceptChip {
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Estados ─────────────────────────────────────────── */
+
+.error {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+}
+
+.status {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .page {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .content {
+    padding: 20px 18px;
+    gap: 20px;
+  }
+}
