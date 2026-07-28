@@ -55,7 +55,7 @@ class InstrumentController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('image')) {
-                $input['image'] = $request->file('image')->store('sistroFiles/imageInstrument', 's3');
+                $input['image'] = $request->file('image')->store('sistroFiles/imageInstrument', 'cloudinary');
             }
 
             Instrument::create($input);
@@ -89,7 +89,7 @@ class InstrumentController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('image')) {
-                $input['image'] = $request->file('image')->store('sistroFiles/imageInstrument', 's3');
+                $input['image'] = $request->file('image')->store('sistroFiles/imageInstrument', 'cloudinary');
             }
 
             $instrument->update($input);
@@ -97,7 +97,7 @@ class InstrumentController extends Controller
             DB::commit();
 
             if ($request->hasFile('image') && $oldImage) {
-                Storage::disk('s3')->delete($oldImage);
+                Storage::disk('cloudinary')->delete($oldImage);
             }
 
             return response()->json(['message' => 'Instrumento editado con éxito.'], 200);
@@ -125,8 +125,8 @@ class InstrumentController extends Controller
             $instrument->delete();
             DB::commit();
 
-            if ($imagePath && Storage::disk('s3')->exists($imagePath)) {
-                Storage::disk('s3')->delete($imagePath);
+            if ($imagePath && Storage::disk('cloudinary')->exists($imagePath)) {
+                Storage::disk('cloudinary')->delete($imagePath);
             }
 
             return response()->json(['message' => 'Instrumento eliminado con éxito.'], 200);

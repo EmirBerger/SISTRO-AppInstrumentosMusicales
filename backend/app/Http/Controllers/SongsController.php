@@ -55,7 +55,7 @@ class SongsController extends Controller
         $song = Song::findOrFail($id);
 
         /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-        $disk = Storage::disk('s3');
+        $disk = Storage::disk('cloudinary');
         $song->file_url = $disk->url($song->file_url);
 
         return response()->json([
@@ -67,7 +67,7 @@ class SongsController extends Controller
     public function streamSheet(int $id): \Illuminate\Http\Response
     {
         $song = Song::findOrFail($id);
-        $disk = Storage::disk('s3');
+        $disk = Storage::disk('cloudinary');
         $content = $disk->get($song->file_url);
         $mime = str_ends_with($song->file_url, '.mxl') ? 'application/vnd.recordare.musicxml' : 'application/xml';
 
@@ -89,11 +89,11 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $input['file_url'] = $request->file('file_url')->store('sistroFiles/sheetMusic', 's3');
+                $input['file_url'] = $request->file('file_url')->store('sistroFiles/sheetMusic', 'cloudinary');
             }
 
             if ($request->hasFile('image')) {
-                $input['image'] = $request->file('image')->store('sistroFiles/imageSong', 's3');
+                $input['image'] = $request->file('image')->store('sistroFiles/imageSong', 'cloudinary');
             }
 
             Song::create($input);
@@ -129,11 +129,11 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $input['file_url'] = $request->file('file_url')->store('sistroFiles/sheetMusic', 's3');
+                $input['file_url'] = $request->file('file_url')->store('sistroFiles/sheetMusic', 'cloudinary');
             }
 
             if ($request->hasFile('image')) {
-                $input['image'] = $request->file('image')->store('sistroFiles/imageSong', 's3');
+                $input['image'] = $request->file('image')->store('sistroFiles/imageSong', 'cloudinary');
             }
 
             $song->update($input);
@@ -141,11 +141,11 @@ class SongsController extends Controller
             DB::commit();
 
             if ($request->hasFile('file_url') && $oldFile) {
-                Storage::disk('s3')->delete($oldFile);
+                Storage::disk('cloudinary')->delete($oldFile);
             }
 
             if ($request->hasFile('image') && $oldImage) {
-                Storage::disk('s3')->delete($oldImage);
+                Storage::disk('cloudinary')->delete($oldImage);
             }
 
             return response()->json(['message' => 'Canción editada con éxito.'], 200);
@@ -173,12 +173,12 @@ class SongsController extends Controller
             $song->delete();
             DB::commit();
 
-            if ($filePath && Storage::disk('s3')->exists($filePath)) {
-                Storage::disk('s3')->delete($filePath);
+            if ($filePath && Storage::disk('cloudinary')->exists($filePath)) {
+                Storage::disk('cloudinary')->delete($filePath);
             }
 
-            if ($imagePath && Storage::disk('s3')->exists($imagePath)) {
-                Storage::disk('s3')->delete($imagePath);
+            if ($imagePath && Storage::disk('cloudinary')->exists($imagePath)) {
+                Storage::disk('cloudinary')->delete($imagePath);
             }
 
             return response()->json(['message' => 'Canción eliminada con éxito.'], 200);
