@@ -7,6 +7,7 @@ use App\Http\Controllers\LessonsController;
 use App\Http\Controllers\SongsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\UploadController;
 Route::get('/instrumentos', [InstrumentController::class, 'getInstruments']);
 Route::get('/instrumentos/{id}', [LessonsController::class, 'getInstrumentMap'])
     ->whereNumber('id');
@@ -44,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
         ->whereNumber('id');
     Route::post('/admin/modulo/{id}/eliminar', [LessonsController::class, 'deleteLesson'])
         ->whereNumber('id');
+    Route::post('/admin/upload/imagen', [UploadController::class, 'uploadImage']);
     Route::post('/admin/cancion/nuevo', [SongsController::class, 'createSong']);
     Route::post('/admin/cancion/{id}/editar', [SongsController::class, 'editSong'])
         ->whereNumber('id');

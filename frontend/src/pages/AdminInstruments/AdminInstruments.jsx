@@ -60,6 +60,40 @@ function ConceptsInput({ concepts, onChange }) {
   )
 }
 
+// ── Image upload field ─────────────────────────────────────────────
+function ImageUploadField({ url, onUrl }) {
+  const [uploading, setUploading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function handleFile(e) {
+    const file = e.target.files[0]
+    if (!file) return
+    setUploading(true)
+    setError('')
+    try {
+      const data = new FormData()
+      data.append('image', file)
+      const res = await api.post('/admin/upload/imagen', data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      onUrl(res.data.url)
+    } catch {
+      setError('Error al subir la imagen')
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  return (
+    <div>
+      <input type="file" accept="image/*" className={styles.fileInput} onChange={handleFile} disabled={uploading} />
+      {uploading && <p className={styles.loadingText}>Subiendo imagen...</p>}
+      {error && <p className={styles.formError}>{error}</p>}
+      {url && <img src={url} alt="preview" style={{ maxHeight: 120, marginTop: 8, borderRadius: 6 }} />}
+    </div>
+  )
+}
+
 // ── Individual block card ──────────────────────────────────────────
 function BlockCard({ block, index, total, onChange, onRemove, onMoveUp, onMoveDown }) {
   const cfg = BLOCK_TYPES[block.type]
@@ -113,11 +147,9 @@ function BlockCard({ block, index, total, onChange, onRemove, onMoveUp, onMoveDo
 
         {block.type === 'image' && (
           <div className={styles.imageFields}>
-            <input
-              className={styles.input}
-              value={block.content.url || ''}
-              onChange={(e) => updateImageField('url', e.target.value)}
-              placeholder="URL de la imagen (podés dejarlo vacío por ahora)"
+            <ImageUploadField
+              url={block.content.url || ''}
+              onUrl={(url) => updateImageField('url', url)}
             />
             <input
               className={styles.input}
