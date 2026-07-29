@@ -89,7 +89,7 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $result = cloudinary()->uploadFile(
+                $result = cloudinary()->upload(
                     $request->file('file_url')->getRealPath(),
                     ['folder' => 'sistroFiles/sheetMusic', 'resource_type' => 'raw']
                 );
@@ -133,7 +133,7 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $result = cloudinary()->uploadFile(
+                $result = cloudinary()->upload(
                     $request->file('file_url')->getRealPath(),
                     ['folder' => 'sistroFiles/sheetMusic', 'resource_type' => 'raw']
                 );
