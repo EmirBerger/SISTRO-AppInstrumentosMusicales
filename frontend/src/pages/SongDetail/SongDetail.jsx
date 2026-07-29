@@ -43,7 +43,14 @@ function SongDetail() {
 
     fetch(song.file_url)
       .then((res) => res.arrayBuffer())
-      .then((buffer) => osmd.load(new Uint8Array(buffer)))
+      .then((buffer) => {
+        const bytes = new Uint8Array(buffer)
+        let binary = ''
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i])
+        }
+        return osmd.load(binary)
+      })
       .then(() => osmd.render())
       .catch(() => setSheetError('No se pudo cargar la partitura'))
       .finally(() => setSheetLoading(false))
