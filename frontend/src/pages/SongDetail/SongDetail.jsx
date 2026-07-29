@@ -41,8 +41,7 @@ function SongDetail() {
     })
     osmdRef.current = osmd
 
-    const sheetUrl = `${import.meta.env.VITE_API_URL ?? 'http://localhost:8000/api'}/cancion/${song.song_id}/partitura`
-    osmd.load(sheetUrl)
+    osmd.load(song.file_url)
       .then(() => osmd.render())
       .catch(() => setSheetError('No se pudo cargar la partitura'))
       .finally(() => setSheetLoading(false))
