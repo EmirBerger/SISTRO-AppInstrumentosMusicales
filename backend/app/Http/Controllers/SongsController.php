@@ -104,7 +104,7 @@ class SongsController extends Controller
 
             DB::commit();
             return response()->json(['message' => 'Canción y partitura agregada con éxito.'], 201);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             return response()->json([
                 'message' => 'Ocurrió un error, canción no agregada.',
@@ -157,7 +157,7 @@ class SongsController extends Controller
             }
 
             return response()->json(['message' => 'Canción editada con éxito.'], 200);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             return response()->json([
                 'message' => 'Ocurrió un error, canción no editada.',
