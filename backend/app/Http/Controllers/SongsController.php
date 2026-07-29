@@ -89,11 +89,11 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $result = cloudinary()->upload(
+                $result = cloudinary()->uploadApi()->upload(
                     $request->file('file_url')->getRealPath(),
                     ['folder' => 'sistroFiles/sheetMusic', 'resource_type' => 'raw']
                 );
-                $input['file_url'] = $result->getSecureUrl();
+                $input['file_url'] = $result['secure_url'];
             }
 
             if ($request->hasFile('image')) {
@@ -133,11 +133,11 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $result = cloudinary()->upload(
+                $result = cloudinary()->uploadApi()->upload(
                     $request->file('file_url')->getRealPath(),
                     ['folder' => 'sistroFiles/sheetMusic', 'resource_type' => 'raw']
                 );
-                $input['file_url'] = $result->getSecureUrl();
+                $input['file_url'] = $result['secure_url'];
             }
 
             if ($request->hasFile('image')) {
