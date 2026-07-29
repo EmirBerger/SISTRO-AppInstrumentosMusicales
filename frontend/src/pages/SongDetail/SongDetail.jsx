@@ -41,7 +41,9 @@ function SongDetail() {
     })
     osmdRef.current = osmd
 
-    osmd.load(song.file_url)
+    fetch(song.file_url)
+      .then((res) => res.arrayBuffer())
+      .then((buffer) => osmd.load(new Uint8Array(buffer)))
       .then(() => osmd.render())
       .catch(() => setSheetError('No se pudo cargar la partitura'))
       .finally(() => setSheetLoading(false))
