@@ -55,7 +55,9 @@ class SongsController extends Controller
         $song = Song::findOrFail($id);
 
         if (!str_starts_with($song->file_url, 'http')) {
-            $song->file_url = Storage::disk('cloudinary')->url($song->file_url);
+            /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+            $disk = Storage::disk('cloudinary');
+            $song->file_url = $disk->url($song->file_url);
         }
 
         return response()->json([
