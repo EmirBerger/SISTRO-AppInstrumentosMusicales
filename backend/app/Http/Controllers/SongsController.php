@@ -54,9 +54,9 @@ class SongsController extends Controller
     {
         $song = Song::findOrFail($id);
 
-        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-        $disk = Storage::disk('cloudinary');
-        $song->file_url = $disk->url($song->file_url);
+        if (!str_starts_with($song->file_url, 'http')) {
+            $song->file_url = Storage::disk('cloudinary')->url($song->file_url);
+        }
 
         return response()->json([
             'status' => 'success',
@@ -89,7 +89,11 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $input['file_url'] = $request->file('file_url')->store('sistroFiles/sheetMusic', 'cloudinary');
+                $result = cloudinary()->uploadFile(
+                    $request->file('file_url')->getRealPath(),
+                    ['folder' => 'sistroFiles/sheetMusic', 'resource_type' => 'raw']
+                );
+                $input['file_url'] = $result->getSecureUrl();
             }
 
             if ($request->hasFile('image')) {
@@ -129,7 +133,11 @@ class SongsController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('file_url')) {
-                $input['file_url'] = $request->file('file_url')->store('sistroFiles/sheetMusic', 'cloudinary');
+                $result = cloudinary()->uploadFile(
+                    $request->file('file_url')->getRealPath(),
+                    ['folder' => 'sistroFiles/sheetMusic', 'resource_type' => 'raw']
+                );
+                $input['file_url'] = $result->getSecureUrl();
             }
 
             if ($request->hasFile('image')) {
