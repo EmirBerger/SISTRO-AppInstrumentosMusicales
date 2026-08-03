@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Mic, MicOff } from 'lucide-react'
+import BackButton from '../../components/BackButton/BackButton'
 import { NOTE_STRINGS, INSTRUMENTS } from './instruments'
 import styles from './Tuner.module.css'
 
@@ -158,6 +159,7 @@ export default function Tuner() {
   if (!selectedInstrument) {
     return (
       <div className={styles.page}>
+        <BackButton />
         <h1 className={styles.title}>Afinador</h1>
         <p className={styles.subtitle}>Elegí tu instrumento</p>
         <div className={styles.instrumentGrid}>
@@ -183,6 +185,7 @@ export default function Tuner() {
   const Icon = selectedInstrument.icon
   return (
     <div className={styles.page}>
+      <BackButton />
       <h1 className={styles.title}>Afinador</h1>
 
       <div className={styles.card}>

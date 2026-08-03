@@ -19,7 +19,21 @@
   color: #ffffff;
 }
 
+/* ── Tablet ── */
+@media (max-width: 900px) {
+  .btn {
+    top: 32px;
+    left: 24px;
+  }
+}
+
+/* ── Mobile ── */
 @media (max-width: 600px) {
+  .btn {
+    top: 24px;
+    left: 16px;
+  }
+
   .label {
     display: none;
   }
