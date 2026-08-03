@@ -8,22 +8,24 @@ use App\Http\Controllers\SongsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UploadController;
-Route::get('/instrumentos', [InstrumentController::class, 'getInstruments']);
-Route::get('/instrumentos/{id}', [LessonsController::class, 'getInstrumentMap'])
-    ->whereNumber('id');
-Route::get('/modulo/{id}', [LessonsController::class, 'getLesson'])
-    ->whereNumber('id');
+/**############### RUTAS DE DATOS (requieren estar logueado) ############### */
+
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/instrumentos', [InstrumentController::class, 'getInstruments']);
+    Route::get('/instrumentos/{id}', [LessonsController::class, 'getInstrumentMap'])
+        ->whereNumber('id');
+    Route::get('/modulo/{id}', [LessonsController::class, 'getLesson'])
+        ->whereNumber('id');
     Route::post('/instrumento/{id}/modulo/iniciar', [LessonsController::class, 'startLesson'])
         ->whereNumber('id');
+    Route::get('/canciones', [SongsController::class, 'getAllSongs']);
+    Route::get('/canciones/{instrumentId}', [SongsController::class, 'getSongsByInstrument'])
+        ->whereNumber('instrumentId');
+    Route::get('/cancion/{id}', [SongsController::class, 'getSong'])
+        ->whereNumber('id');
+    Route::get('/cancion/{id}/partitura', [SongsController::class, 'streamSheet'])
+        ->whereNumber('id');
 });
-Route::get('/canciones', [SongsController::class, 'getAllSongs']);
-Route::get('/canciones/{instrumentId}', [SongsController::class, 'getSongsByInstrument'])
-    ->whereNumber('instrumentId');
-Route::get('/cancion/{id}', [SongsController::class, 'getSong'])
-    ->whereNumber('id');
-Route::get('/cancion/{id}/partitura', [SongsController::class, 'streamSheet'])
-    ->whereNumber('id');
 
 /**################################# RUTAS DEL ADMIN ################################# */
 
