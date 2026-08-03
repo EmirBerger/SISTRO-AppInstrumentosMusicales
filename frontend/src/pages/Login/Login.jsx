@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import api from '../../services/api'
@@ -10,7 +10,15 @@ function Login() {
 
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem('sessionEndedReason') === 'otro-dispositivo') {
+      setNotice('Se inició sesión en esta cuenta desde otro dispositivo.')
+      localStorage.removeItem('sessionEndedReason')
+    }
+  }, [])
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -36,6 +44,8 @@ function Login() {
     <div className={styles.page}>
       <div className={styles.card}>
         <h1 className={styles.title}>Ingresar</h1>
+
+        {notice && <p className={styles.notice}>{notice}</p>}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div className={styles.field}>
