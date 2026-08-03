@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import BackButton from '../../components/BackButton/BackButton'
 import api from '../../services/api'
-import { storageUrl } from '../../services/storage'
 import styles from './InstrumentList.module.css'
 
 function InstrumentList() {
@@ -33,7 +32,7 @@ function InstrumentList() {
           <Card
             key={inst.instrument_id}
             title={inst.name}
-            image={storageUrl(inst.image)}
+            icon={inst.icon}
             onClick={() => navigate(`/instrumento/${inst.instrument_id}`)}
           />
         ))}

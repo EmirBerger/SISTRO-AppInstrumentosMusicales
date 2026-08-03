@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { ChevronDown, ChevronRight, Plus, Pencil, Trash2, X, ArrowUp, ArrowDown } from 'lucide-react'
 import BackButton from '../../components/BackButton/BackButton'
 import api from '../../services/api'
+import { INSTRUMENT_ICONS, getInstrumentIcon } from '../../config/instrumentIcons'
 import styles from './AdminInstruments.module.css'
 
 // ── Block type config ──────────────────────────────────────────────
@@ -421,12 +422,14 @@ function InstrumentModal({ instrument, onClose, onSaved }) {
   const editing = !!instrument
   const [form, setForm] = useState({
     name: instrument?.name ?? '',
+    icon: instrument?.icon ?? 'otro',
     image_description: instrument?.image_description ?? '',
     is_active: instrument?.is_active ?? true,
   })
-  const [imageFile, setImageFile] = useState(null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+
+  const SelectedIcon = getInstrumentIcon(form.icon)
 
   function handle(e) {
     const { name, value, type, checked } = e.target
@@ -438,20 +441,17 @@ function InstrumentModal({ instrument, onClose, onSaved }) {
     setSaving(true)
     setError('')
     try {
-      const data = new FormData()
-      data.append('name', form.name)
-      data.append('image_description', form.image_description)
-      data.append('is_active', form.is_active ? '1' : '0')
-      if (imageFile) data.append('image', imageFile)
+      const payload = {
+        name: form.name,
+        icon: form.icon,
+        image_description: form.image_description,
+        is_active: form.is_active ? 1 : 0,
+      }
 
       if (editing) {
-        await api.post(`/admin/instrumento/${instrument.instrument_id}/editar`, data, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        })
+        await api.post(`/admin/instrumento/${instrument.instrument_id}/editar`, payload)
       } else {
-        await api.post('/admin/instrumento/nuevo', data, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        })
+        await api.post('/admin/instrumento/nuevo', payload)
       }
       onSaved()
     } catch (err) {
@@ -465,12 +465,20 @@ function InstrumentModal({ instrument, onClose, onSaved }) {
     <Modal title={editing ? 'Editar instrumento' : 'Nuevo instrumento'} onClose={onClose}>
       <form onSubmit={submit}>
         <Field label="Nombre" name="name" value={form.name} onChange={handle} required />
-        <Field label="Descripción de imagen" name="image_description" value={form.image_description} onChange={handle} />
         <div className={styles.field}>
-          <label className={styles.label}>Imagen{!editing && ' *'}</label>
-          <input type="file" accept="image/*" className={styles.fileInput}
-            onChange={(e) => setImageFile(e.target.files[0])} />
+          <label className={styles.label}>Icono *</label>
+          <div className={styles.iconPickerRow}>
+            <select className={styles.input} name="icon" value={form.icon} onChange={handle}>
+              {INSTRUMENT_ICONS.map((i) => (
+                <option key={i.value} value={i.value}>{i.label}</option>
+              ))}
+            </select>
+            <div className={styles.iconPreview}>
+              <SelectedIcon size={30} color="#33AB1B" />
+            </div>
+          </div>
         </div>
+        <Field label="Descripción (opcional)" name="image_description" value={form.image_description} onChange={handle} />
         <div className={styles.checkboxField}>
           <input type="checkbox" name="is_active" checked={form.is_active} onChange={handle} id="is_active" />
           <label htmlFor="is_active">Activo</label>

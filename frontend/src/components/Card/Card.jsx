@@ -1,24 +1,26 @@
 import { Guitar, Piano, Music2, AudioWaveform, Music } from 'lucide-react'
+import { getInstrumentIcon } from '../../config/instrumentIcons'
 import styles from './Card.module.css'
 
-const ICON_MAP = {
+// Fallback: si el instrumento todavía no tiene icono elegido, lo deducimos del nombre.
+const NAME_ICON_MAP = {
   guitarra: Guitar,
   guitar: Guitar,
   piano: Piano,
   bajo: Music2,
   bass: Music2,
-  ukulele: Guitar,
+  ukelele: Guitar,
   violín: AudioWaveform,
   violin: AudioWaveform,
 }
 
-function getIcon(title) {
+function iconFromName(title) {
   const key = title?.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
-  return ICON_MAP[key] ?? Music
+  return NAME_ICON_MAP[key] ?? Music
 }
 
-function Card({ title, onClick }) {
-  const Icon = getIcon(title)
+function Card({ title, icon, onClick }) {
+  const Icon = icon ? getInstrumentIcon(icon) : iconFromName(title)
   return (
     <div className={styles.card} onClick={onClick}>
       <div className={styles.placeholder}>
