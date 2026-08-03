@@ -12,33 +12,38 @@ class InstrumentController extends Controller
 {
     protected array $createValidationRules = [
         'name'              => 'required|unique:instruments,name',
-        'image'             => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        'image_description' => 'required',
+        'icon'              => 'required|string',
+        'image_description' => 'nullable',
         'is_active'         => 'boolean'
     ];
 
     protected array $validationRules = [
         'name'              => 'required',
-        'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'image_description' => 'required',
+        'icon'              => 'required|string',
+        'image_description' => 'nullable',
         'is_active'         => 'boolean'
     ];
 
     protected array $validationMessages = [
-        'name.required'              => 'El nombre del instrumento es requerido.',
-        'name.unique'                => 'El instrumento ya está cargado.',
-        'image.required'             => 'La imagen del instrumento es requerida.',
-        'image.image'                => 'El archivo debe ser una imagen válida.',
-        'image_description.required' => 'La descripción es requerida.'
+        'name.required' => 'El nombre del instrumento es requerido.',
+        'name.unique'   => 'El instrumento ya está cargado.',
+        'icon.required' => 'El icono del instrumento es requerido.'
     ];
 
-    public function getInstruments(): JsonResponse
+    public function getInstruments(Request $request): JsonResponse
     {
-        $instruments = Instrument::all();
+        $user = $request->user('sanctum');
+
+        $query = Instrument::query();
+
+        // El admin ve todos los instrumentos; el alumno solo los activos.
+        if (!($user && $user->rol === 1)) {
+            $query->where('is_active', true);
+        }
 
         return response()->json([
             'status' => 'success',
-            'data'   => $instruments
+            'data'   => $query->get()
         ], 200);
     }
 
@@ -49,22 +54,14 @@ class InstrumentController extends Controller
         }
 
         $request->validate($this->createValidationRules, $this->validationMessages);
-        $input = $request->except('image');
+        $input = $request->only('name', 'icon', 'image_description', 'is_active');
 
         try {
-            DB::beginTransaction();
-
-            if ($request->hasFile('image')) {
-                $input['image'] = $request->file('image')->store('sistroFiles/imageInstrument', 'cloudinary');
-            }
-
             Instrument::create($input);
 
-            DB::commit();
             return response()->json(['message' => 'Instrumento agregado con éxito.'], 201);
 
         } catch (\Exception $e) {
-            DB::rollBack();
             return response()->json([
                 'message' => 'Ocurrió un error, instrumento no agregado.',
                 'error'   => $e->getMessage()
@@ -82,28 +79,14 @@ class InstrumentController extends Controller
 
         $instrument = Instrument::findOrFail($id);
 
-        $input    = $request->only('name', 'image_description', 'is_active');
-        $oldImage = $instrument->image;
+        $input = $request->only('name', 'icon', 'image_description', 'is_active');
 
         try {
-            DB::beginTransaction();
-
-            if ($request->hasFile('image')) {
-                $input['image'] = $request->file('image')->store('sistroFiles/imageInstrument', 'cloudinary');
-            }
-
             $instrument->update($input);
-
-            DB::commit();
-
-            if ($request->hasFile('image') && $oldImage) {
-                Storage::disk('cloudinary')->delete($oldImage);
-            }
 
             return response()->json(['message' => 'Instrumento editado con éxito.'], 200);
 
         } catch (\Exception $e) {
-            DB::rollBack();
             return response()->json([
                 'message' => 'Ocurrió un error, instrumento no editado.',
                 'error'   => $e->getMessage()

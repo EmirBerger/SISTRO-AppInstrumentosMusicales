@@ -12,7 +12,7 @@ class Instrument extends Model
 
     protected $table = 'instruments';
     protected $primaryKey = 'instrument_id';
-    protected $fillable = ['name', 'image', 'image_description', 'is_active'];
+    protected $fillable = ['name', 'icon', 'image', 'image_description', 'is_active'];
 
     public function modules(): HasMany
     {
