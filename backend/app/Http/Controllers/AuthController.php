@@ -66,6 +66,11 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
+
+        // Sesión única: al iniciar sesión, se cierran las sesiones anteriores
+        // en otros dispositivos (gana el último que entra).
+        $user->tokens()->delete();
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
