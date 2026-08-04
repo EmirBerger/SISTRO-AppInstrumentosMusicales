@@ -32,17 +32,18 @@ class UploadController extends Controller
             ], 422);
         }
 
-        // Los SVG se suben como "raw" para no depender de la config de entrega de SVG de Cloudinary.
+        // El SVG se sube como "image" para que Cloudinary lo sirva con content-type
+        // image/svg+xml y el navegador lo pueda renderizar dentro de un <img>.
         if ($extension === 'svg') {
             $result = cloudinary()->uploadApi()->upload(
                 $file->getRealPath(),
-                ['folder' => 'sistroFiles/blocks', 'resource_type' => 'raw']
+                ['folder' => 'sistroFiles/imgClass', 'resource_type' => 'image']
             );
             $url = $result['secure_url'];
         } else {
             /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
             $disk = Storage::disk('cloudinary');
-            $path = $file->store('sistroFiles/blocks', 'cloudinary');
+            $path = $file->store('sistroFiles/imgClass', 'cloudinary');
             $url  = $disk->url($path);
         }
 
