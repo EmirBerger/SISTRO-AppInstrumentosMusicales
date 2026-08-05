@@ -45,7 +45,10 @@ function Sidebar() {
     <>
       {/* ── Sidebar (desktop / tablet) ── */}
       <aside className={styles.sidebar}>
-        <Link to="/inicio" className={styles.logo}>Sistro</Link>
+        <Link to="/inicio" className={styles.logo}>
+          <img src="/logo.svg" alt="" className={styles.logoImg} />
+          <span>Sistro</span>
+        </Link>
 
         <nav className={styles.nav}>
           {NAV_ITEMS.map((item) => {

@@ -5,6 +5,7 @@ function Welcome() {
   return (
     <div className={styles.page}>
       <div className={styles.left}>
+        <img src="/logo.svg" alt="Logo de Sistro" className={styles.logo} />
         <h1 className={styles.title}>Sistro</h1>
       </div>
 
