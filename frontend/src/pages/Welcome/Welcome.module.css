@@ -13,13 +13,14 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 0;
 }
 
 .logo {
-  height: clamp(180px, 40vw, 420px);
+  height: clamp(160px, 40vw, 400px);
   width: auto;
   flex-shrink: 0;
+  margin-right: -30px;  
 }
 
 .right {
@@ -32,7 +33,7 @@
 
 .title {
   color: #ffffff;
-  font-size: clamp(64px, 15vw, 160px);
+  font-size: clamp(90px, 20vw, 160px);
   font-weight: 700;
   letter-spacing: 2px;
   margin: 0;
@@ -46,7 +47,8 @@
   text-align: center;
 }
 
-@media (max-width: 768px) {
+/* ── TABLET  ── */
+@media (max-width: 1280px) {
   .page {
     flex-direction: column;
     justify-content: center;
@@ -59,6 +61,10 @@
     flex: initial;
   }
 
+  .logo {
+    height: 260px; 
+  }
+
   .right {
     flex: initial;
     width: 100%;
@@ -68,6 +74,23 @@
   .subtitle {
     margin-top: 0;
   }
+}
+
+/* ── CELULAR  ── */
+@media (max-width: 750px) {
+  .left {
+    flex-direction: column;
+  }
+
+  .logo {
+    height: 260px;  
+  }
+
+  .title {
+  
+  font-size: 90px;
+
+}
 }
 
 .buttons {
