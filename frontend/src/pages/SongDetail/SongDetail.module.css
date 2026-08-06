@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .title {
@@ -23,12 +24,14 @@
   font-weight: 700;
   color: #ffffff;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .artist {
   color: rgba(255, 255, 255, 0.5);
   font-size: 1rem;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .badge {
@@ -92,11 +95,19 @@
   font-size: 0.95rem;
 }
 
+/* Debajo de este ancho el .page deja de tener margen lateral libre,
+   así que el título quedaría bajo el botón "Volver" (absolute).
+   Reservamos el alto del botón. */
+@media (max-width: 1400px) {
+  .page { padding-top: 44px; }
+}
+
 @media (max-width: 900px) {
   .page { max-width: 100%; }
 }
 
 @media (max-width: 600px) {
+  .page { padding-top: 36px; }
   .title { font-size: 1.4rem; }
   .sheetWrapper { padding: 16px; }
 }
