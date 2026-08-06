@@ -27,16 +27,26 @@ const BADGE_CLASS = {
 function Songs() {
   const navigate = useNavigate()
   const [songs, setSongs] = useState([])
+  const [instruments, setInstruments] = useState([])
   const [filter, setFilter] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    api.get('/canciones')
-      .then((res) => setSongs(res.data.data))
+    Promise.all([
+      api.get('/canciones'),
+      api.get('/instrumentos'),
+    ])
+      .then(([songsRes, instrumentsRes]) => {
+        setSongs(songsRes.data.data)
+        setInstruments(instrumentsRes.data.data)
+      })
       .catch(() => setError('No se pudieron cargar las canciones'))
       .finally(() => setLoading(false))
   }, [])
+
+  const instrumentName = (id) =>
+    instruments.find((i) => i.instrument_id === id)?.name ?? null
 
   const filtered = filter ? songs.filter((s) => s.difficulty === filter) : songs
 
@@ -80,6 +90,9 @@ function Songs() {
             <div className={styles.songInfo}>
               <p className={styles.songTitle}>{song.title}</p>
               <p className={styles.songArtist}>{song.artist}</p>
+              {instrumentName(song.instrument_id) && (
+                <span className={styles.instrument}>{instrumentName(song.instrument_id)}</span>
+              )}
             </div>
             <span className={`${styles.badge} ${BADGE_CLASS[song.difficulty] ?? ''}`}>
               {DIFFICULTY_LABELS[song.difficulty] ?? song.difficulty}

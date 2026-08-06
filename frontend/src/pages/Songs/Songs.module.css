@@ -101,6 +101,7 @@
 
 .songInfo {
   flex: 1;
+  min-width: 0;
 }
 
 .songTitle {
@@ -114,6 +115,18 @@
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.85rem;
   margin: 0;
+}
+
+.instrument {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .badge {
@@ -175,5 +188,11 @@
 
   .songArtist {
     font-size: 0.78rem;
+  }
+
+  .instrument {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    margin-top: 4px;
   }
 }
